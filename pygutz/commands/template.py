@@ -9,7 +9,6 @@ class HexTemplate(BaseTemplate):
         "services.py": getattr(hexproject, "generate_services_content"),
         "repositories.py": getattr(hexproject, "generate_repositories_content"),
         "base.py": getattr(hexproject, "generate_base_content"),
-        "commands.py": getattr(hexproject, "generate_commands_content"),
         "main.py": getattr(hexproject, "generate_main_content"),
         "logs.py": getattr(hexproject, "generate_log_content"),
         "database.py": getattr(hexproject, "generate_dbconfig_content"),
@@ -17,9 +16,6 @@ class HexTemplate(BaseTemplate):
         "schemas.py": getattr(hexproject, "generate_schemas_content"),
         "settings.py": getattr(hexproject, "generate_setting_content"),
         ".gitignore": getattr(general, "generate_gitignore_content"),
-        "core": {
-            "__init__.py": getattr(hexproject, "generate_init_core_content")
-        },
         "routes": {
             "__init__.py": getattr(hexproject, "generate_init_routes_content")
         },
@@ -52,7 +48,7 @@ class HexTemplate(BaseTemplate):
         if filename == "__init__.py":
             # Get folder of __init__.py
             folder_name = self.get_folder_of_file(file_path)
-            if folder_name in {"core", 'routes', 'server', 'pkgs'}:
+            if folder_name in {'routes', 'server', 'pkgs'}:
                 genfunc = self.generator_map.get(folder_name)
                 init_genfunc = dict(genfunc).get("__init__.py")
                 if init_genfunc is None:
@@ -115,6 +111,8 @@ class HexTemplate(BaseTemplate):
                         elif isinstance(filename, dict):
                             # Recursive call for subfolder
                             self.create_file_system(path, filename)
+    def check_exit_dir(self):
+        pass
     
     def generate(self):
         self.create_file_system(self.base, self.base_structure)   

@@ -10,10 +10,11 @@ class Env(BaseSettings):
 env = Env()'''
 
 def generate_main_content():
-    return '''from core import command_executor
+    return '''import uvicorn
+from pkgs import LOGGING_CONFIG
 
 def main():
-    command_executor()
+    uvicorn.run("server:app", reload=True, log_config=LOGGING_CONFIG)
     
 if __name__=="__main__":
     main()'''
@@ -139,17 +140,6 @@ class Log:
     @classmethod
     def getLogger(cls):
         return cls().logger'''
-
-def generate_init_core_content():
-    return '''import sys
-from core.commands import Command
-
-def command_executor():
-    argv = sys.argv
-    if len(argv) < 2:
-        return
-    cmd = Command(argv)
-    cmd.execute()'''
 
 def generate_commands_content():
     return '''import os

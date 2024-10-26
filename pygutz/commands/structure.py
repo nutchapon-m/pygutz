@@ -2,7 +2,6 @@ HEXAGONAL_STRUCTURE = {
     "app" : {
         "core": [
             "__init__.py", 
-            "commands.py", 
             {
                 "entities": [
                     "__init__.py", 
@@ -11,7 +10,6 @@ HEXAGONAL_STRUCTURE = {
                 ], 
                 "interfaces":[
                     "__init__.py", 
-                    "base.py", 
                     "services.py", 
                     "repositories.py"
                 ]
